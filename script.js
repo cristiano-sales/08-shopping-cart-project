@@ -40,4 +40,22 @@ function createCartItemElement({ sku, name, salePrice }) {
   return li;
 }
 
-window.onload = () => { };
+const computers = async () => {
+  const apiComputers = await fetchProducts();
+  await apiComputers.forEach(({ id, title, thumbnail }) => {
+    const sku = id;
+    const name = title;
+    const image = thumbnail;
+    document.getElementsByClassName('items')[0]
+      .appendChild(createProductItemElement({ sku, name, image }));
+  });
+};
+
+window.onload = async () => {
+  await computers();
+};
+
+//  References:
+// Wendy Silva
+// Adriano Santos
+// Leandro de Oliveira
