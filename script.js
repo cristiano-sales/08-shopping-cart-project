@@ -34,7 +34,15 @@ function getSkuFromProductItem(item) {
 const removeItem = (event) => {
   if (event.target.className === 'cart__item') {
     event.target.remove();
+
+    const carrinho = classeCartItems.innerHTML;
+    saveCartItems(carrinho);
   }
+};
+
+const salvaLocalStorage = () => {
+  classeCartItems.innerHTML = getSavedCartItems('cartItems');
+  classeCartItems.addEventListener('click', removeItem);  
 };
 
 function cartItemClickListener() {
@@ -57,16 +65,15 @@ const computers = async () => {
 };
 
 const adicionaAoCarrinho = () => {
-  classeItems.addEventListener('click', async (event) => { // Ao clicar nesse botão você deve realizar uma requisição que irá retornar todos os dados específicos de um produto.
-    console.log(event.target);
-    if (event.target.className === 'item__add') { //  Verifica se clicou exatamente em um botão de class__add 
-      const produtoClicado = getSkuFromProductItem(event.target.parentNode); // recupera o parentNode do alvo, cujo contém sku, title, image e button
-      const { id: sku, title: name, price: salePrice } = await fetchItem(produtoClicado); // faz a requisição apenas do produto clicado
-      const listaClicado = createCartItemElement({ sku, name, salePrice }); // cria lista que irá para o carrinho
-      classeCartItems.appendChild(listaClicado); // O carrinho  recebe o a li inner text do produto clicado
-      const carrinho = classeCartItems.innerHTML; // acessa o innerHTML do carrinho
-      saveCartItems(carrinho); // a função dada em helpers salva o carrinho no Local Storage
-      //  totalPrice();   
+  classeItems.addEventListener('click', async (event) => {
+    if (event.target.className === 'item__add') { 
+      const produtoClicado = getSkuFromProductItem(event.target.parentNode);
+      const { id: sku, title: name, price: salePrice } = await fetchItem(produtoClicado);
+      const listaClicado = createCartItemElement({ sku, name, salePrice });
+      classeCartItems.appendChild(listaClicado);
+
+      const carrinho = classeCartItems.innerHTML;
+      saveCartItems(carrinho);
     }
   });
 };
@@ -74,6 +81,7 @@ const adicionaAoCarrinho = () => {
 window.onload = async () => {
   await computers();
   adicionaAoCarrinho();
+  salvaLocalStorage();
 };
 
 //  References:
