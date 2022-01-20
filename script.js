@@ -31,8 +31,14 @@ function getSkuFromProductItem(item) {
   return item.querySelector('span.item__sku').innerText; // retorna o sku do produto, exemplo MLB2025368569 
 }
 
-function cartItemClickListener(event) {
-  // coloque seu código aqui
+const removeItem = (event) => {
+  if (event.target.className === 'cart__item') {
+    event.target.remove();
+  }
+};
+
+function cartItemClickListener() {
+  classeCartItems.addEventListener('click', removeItem);
 }
 
 function createCartItemElement({ sku, name, salePrice }) {  
