@@ -92,11 +92,21 @@ const adicionaAoCarrinho = () => {
   });
 };
 
+const carrinhoVazio = () => {
+  const botao = document.querySelector('.empty-cart');
+  botao.addEventListener('click', () => {
+    classeCartItems.innerHTML = '';
+    const salvaLocalStorageVazio = classeCartItems.innerHTML;
+    saveCartItems(salvaLocalStorageVazio);
+  });
+};
+
 window.onload = async () => {
   await computers();
   adicionaAoCarrinho();
   salvaLocalStorage();
   precoTotal();
+  carrinhoVazio();
 };
 
 //  References:
