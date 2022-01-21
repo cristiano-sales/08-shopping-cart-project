@@ -92,6 +92,12 @@ const adicionaAoCarrinho = () => {
   });
 };
 
+const carregando = async () => {
+  const loading = document.querySelector('.loading');
+  await fetchProducts('computador');
+  loading.remove();  
+};
+
 const carrinhoVazio = () => {
   const botao = document.querySelector('.empty-cart');
   botao.addEventListener('click', () => {
@@ -107,6 +113,7 @@ window.onload = async () => {
   salvaLocalStorage();
   precoTotal();
   carrinhoVazio();
+  carregando();
 };
 
 //  References:
