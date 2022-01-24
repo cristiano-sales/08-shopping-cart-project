@@ -53,7 +53,7 @@ const removeItem = (event) => {
 };
 
 const salvaLocalStorage = () => {
-  classeCartItems.innerHTML = getSavedCartItems('cartItems');
+  classeCartItems.innerHTML = getSavedCartItems();
   classeCartItems.addEventListener('click', removeItem);  
 };
 
