@@ -1,3 +1,5 @@
+//  Ref.: Douglas Marçal
+
 const classeItems = document.querySelector('.items');
 const classeCartItems = document.querySelector('.cart__items');
 
