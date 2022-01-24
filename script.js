@@ -70,8 +70,8 @@ const createCartItemElement = ({ sku, name, salePrice }) => {
 };
 
 const computers = async () => {
-  const apiComputers = await fetchProducts();
-  await apiComputers.forEach(({ id: sku, title: name, thumbnail: image }) => {
+  const apiComputers = await fetchProducts('computador');
+  await apiComputers.results.forEach(({ id: sku, title: name, thumbnail: image }) => {
     classeItems.appendChild(createProductItemElement({ sku, name, image }));
   });
 };
@@ -94,8 +94,8 @@ const adicionaAoCarrinho = () => {
 
 const carregando = async () => {
   const loading = document.querySelector('.loading');
-  await fetchProducts('computador');
-  loading.remove();  
+  await fetchProducts();
+  loading.remove();
 };
 
 const carrinhoVazio = () => {
